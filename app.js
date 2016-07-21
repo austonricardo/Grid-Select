@@ -41,7 +41,7 @@ exampleApp.controller('mainCtrl', ['$scope', '$http', 'grs', function($scope,$ht
         This function will be evaluated each time when the grs instance opens.
         This should return an array of objects. Each object in array is each header. Each object must contain two attributes - col and width (Obviously if width is given in % , sum of all the widths must be 100% ; or else, the data will be mis-aligned in the element.)
         */
-        return ($scope.dummy === 'dummy')?([{col: 'Day', width: '75%'},{col: 'Condition', width: '25%'}]):([{col: 'Day', width: '50%'},{col: 'Condition', width: '50%'}]);
+        return ($scope.dummy === 'dummy')?([{col: 'Login', width: '75%'},{col: 'Id', width: '25%'}]):([{col: 'Login', width: '50%'},{col: 'Id', width: '50%'}]);
       },
       minChars: '1',//This is the minChars that should be entered before search should start.
       defaultTerm: function () {
@@ -59,14 +59,14 @@ exampleApp.controller('mainCtrl', ['$scope', '$http', 'grs', function($scope,$ht
         searchTerm is the term typed in search input box.
         page is the page value. This will be helpful to load data on scroll.
         */
-        return 'https://george-vustrey-weather.p.mashape.com/api.php?location=' + searchTerm;
+        return 'https://api.github.com/search/users?q=' + searchTerm;
       },
       searchHttpHeaders: function () {
         /*
         This function will be called when a grs instance is opened.
         This should return an object which will be set as headers while doing a http call to search.
         */
-        return {'X-Mashape-Key': '4tPdXSKejGmsht2ucNPOLsoMJZHzp1CQfWujsn6aOEk9sXqC0O'};
+        return {};//'X-Mashape-Key': '4tPdXSKejGmsht2ucNPOLsoMJZHzp1CQfWujsn6aOEk9sXqC0O'
       },
       moreDecider: function (httpData, httpStatus, httpHeaders) {
         /*
@@ -96,10 +96,10 @@ exampleApp.controller('mainCtrl', ['$scope', '$http', 'grs', function($scope,$ht
           return grsData;
         } else {
           var oneRecord = [];
-          angular.forEach(data, function (value) {
+          angular.forEach(data.items, function (value) {
             oneRecord = [];
-            oneRecord.push(value.day_of_week);
-            oneRecord.push(value.condition);
+            oneRecord.push(value.login);
+            oneRecord.push(value.id);
             grsData.data.push(oneRecord);
           });
           grsData.actualData = httpData;

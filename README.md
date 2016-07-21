@@ -2,6 +2,7 @@ Grid-Select
 ===========
 
 Basic functionality of select box with the set of divs
+Fixed service sample to search github users and show usename and id on grid: austonricardo.  
 
 ## Features
 
